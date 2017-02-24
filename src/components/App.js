@@ -1,14 +1,26 @@
-import React from 'react'
+import React, { Component } from 'react'
+import { connect } from 'react-redux'
 import VisibleTodoList from '../containers/VisibleTodoList'
 import AddTodoBlock from '../containers/AddTodoBlock'
-import Footer from './Footer'
+import ProgressFooter from '../containers/ProgressFooter'
+import { fetchTodos } from '../actions'
 
-const App = () => (
-  <div>
-    <Footer />
-    <AddTodoBlock />
-    <VisibleTodoList />
-  </div>
-)
+class App extends Component {
 
-export default App
+  componentDidMount(){
+    const { dispatch } = this.props
+    dispatch(fetchTodos())
+  }
+
+  render() {
+    return (
+      <div>
+        <ProgressFooter />
+        <AddTodoBlock />
+        <VisibleTodoList />
+      </div>
+    )
+  }
+}
+
+export default connect()(App)
