@@ -1,8 +1,9 @@
 import React from 'react'
 import Todo from './Todo'
+import { ListGroup } from 'react-bootstrap'
 
 const TodoList = ({ todos, onTodoClick, onTodoDbClick }) => (
-  <ul>
+  <ListGroup>
     {todos.map(todo =>
       <Todo key={todo.id}
         {...todo}
@@ -10,7 +11,7 @@ const TodoList = ({ todos, onTodoClick, onTodoDbClick }) => (
         onDblClick={() => onTodoDbClick(todo.id)}
       />
     )}
-  </ul>
+  </ListGroup>
 )
 
 export default TodoList

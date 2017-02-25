@@ -1,5 +1,6 @@
 import queryString from 'query-string'
 import uuid from 'uuid/v4'
+import { showLoading, hideLoading } from 'react-redux-loading-bar'
 
 export const requestTodos = () => ({
   type: "REQUEST_TODOS"
@@ -13,31 +14,40 @@ export const receiveTodos = (json) => ({
 export const fetchTodos = () => {
 
   return function(dispatch){
+    dispatch(showLoading())
     dispatch(requestTodos())
 
-    return fetch('http://localhost:8080/api/todos.json', {method: "GET"})
+    return fetch('http://localhost:8080/api/todos.json')
         .then(response => response.json())
-        .then(json => dispatch(receiveTodos(json)))
+        .then(json => {
+          dispatch(receiveTodos(json))
+          dispatch(hideLoading())
+        })
   }
 }
 
 export const addTodo = (text) => {
 
   return function(dispatch){
+    dispatch(showLoading())
     dispatch(requestTodos())
 
     const method = "POST"
     const body = queryString.stringify({ text: text, id: uuid() })
     const headers = {'Content-Type':'application/x-www-form-urlencoded'}
 
-    return fetch("http://localhost:8080/api/todos.json", {method, headers, body} )
+    return fetch("http://localhost:8080/api/todos.json", {method, headers, body } )
         .then(response => response.json())
-        .then(json => dispatch(receiveTodos(json)))
+        .then(json => {
+          dispatch(receiveTodos(json))
+          dispatch(hideLoading())
+        })
   }
 }
 
 export const toggleTodo = (id) => {
   return function(dispatch) {
+    dispatch(showLoading())
     dispatch(requestTodos())
 
     const method = "PUT"
@@ -49,12 +59,16 @@ export const toggleTodo = (id) => {
 
     return fetch("http://localhost:8080/api/todos.json?"+queryString.stringify({id: id}), {method, headers})
         .then(response => response.json())
-        .then(json => dispatch(receiveTodos(json)))
+        .then(json => {
+          dispatch(receiveTodos(json))
+          dispatch(hideLoading())
+        })
   }
 }
 
 export const removeTodo = (id) => {
   return function(dispatch) {
+    dispatch(showLoading())
     dispatch(requestTodos())
 
     var headers = {
@@ -67,7 +81,10 @@ export const removeTodo = (id) => {
 
     return fetch("http://localhost:8080/api/todos.json?"+queryString.stringify({id: id}), config)
         .then(response => response.json())
-        .then(json => dispatch(receiveTodos(json)))
+        .then(json => {
+          dispatch(receiveTodos(json))
+          dispatch(hideLoading())
+        })
   }
 }
 

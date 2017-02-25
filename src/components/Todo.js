@@ -1,11 +1,22 @@
 import React from 'react'
+import { ListGroupItem, Button, Glyphicon } from 'react-bootstrap'
 
 const Todo = ({ onClick, onDblClick, completed, text }) => (
-  <li>
+  <ListGroupItem>
+    <span style={{fontSize : 8}}><Glyphicon glyph="tasks" /></span> {" "}
     <span onClick={onClick} style={{ textDecoration: completed ? 'line-through' : 'none' }}>{text}</span>
     {"    "}
-    <a href="#" onClick={(e) => {e.preventDefault(); onDblClick();} }>x</a>
-  </li>
+    <span>
+      <Button className="noborder pull-right" bsSize="xsmall" onClick={
+        (e) => {e.preventDefault(); onDblClick();}
+      }>
+        <Glyphicon glyph="trash" />
+      </Button>
+      {/*<Button className="noborder pull-right" bsSize="xsmall">*/}
+        {/*<Glyphicon glyph="edit" />*/}
+      {/*</Button>*/}
+    </span>
+  </ListGroupItem>
 )
 
 export default Todo
