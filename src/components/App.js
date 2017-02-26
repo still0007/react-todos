@@ -8,9 +8,18 @@ import LoadingBar from 'react-redux-loading-bar'
 
 class App extends Component {
 
+  constructor({props, params}){
+    super(props)
+    this.params = params
+  }
+
   componentDidMount(){
     const { dispatch } = this.props
     dispatch(fetchTodos())
+  }
+
+  componentWillReceiveProps({ params }){
+    this.params = params
   }
 
   render() {
@@ -19,7 +28,7 @@ class App extends Component {
         <LoadingBar style={{ backgroundColor: 'green' }}/>
         <ProgressFooter />
         <AddTodoBlock />
-        <VisibleTodoList />
+        <VisibleTodoList filter={this.params.filter || 'all'}/>
       </div>
     )
   }

@@ -1,7 +1,7 @@
 import React from 'react'
 import {findDOMNode} from 'react-dom'
 import { addTodo } from '../actions'
-import { Glyphicon, FormGroup, InputGroup, FormControl, Button } from 'react-bootstrap'
+import { Glyphicon, FormGroup, InputGroup, FormControl } from 'react-bootstrap'
 
 const AddTodo = ( { dispatch } ) => {
 
