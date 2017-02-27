@@ -2,6 +2,11 @@ import queryString from 'query-string'
 import uuid from 'uuid/v4'
 import { showLoading, hideLoading } from 'react-redux-loading-bar'
 
+export const setVisibilityFilter = (filter) => ({
+  type: "SET_VISIBILITY_FILTER",
+  filter
+})
+
 export const requestTodos = () => ({
   type: "REQUEST_TODOS"
 })
@@ -46,6 +51,7 @@ export const addTodo = (text) => {
 }
 
 export const toggleTodo = (id) => {
+
   return function(dispatch) {
     dispatch(showLoading())
     dispatch(requestTodos())
@@ -67,6 +73,7 @@ export const toggleTodo = (id) => {
 }
 
 export const removeTodo = (id) => {
+
   return function(dispatch) {
     dispatch(showLoading())
     dispatch(requestTodos())
@@ -87,8 +94,3 @@ export const removeTodo = (id) => {
         })
   }
 }
-
-export const setVisibilityFilter = (filter) => ({
-  type: "SET_VISIBILITY_FILTER",
-  filter
-})
