@@ -11,6 +11,7 @@ class App extends Component {
   constructor({props, params}){
     super(props)
     this.params = params
+    console.log(this.params)
   }
 
   componentDidMount(){
